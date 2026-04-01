@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DECON ART — მოთხოვნა მიღებულია</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Smartdoor';
+      src: url('Smartdoor-font.woff2') format('woff2');
+      font-display: swap;
+    }
+
+    :root {
+      --sage: #677465;
+      --terra: #be654e;
+      --white: #ffffff;
+      --off-white: #f5f3f0;
+      --dark: #1a1916;
+      --font: 'Smartdoor', 'Noto Sans Georgian', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at top right, rgba(190,101,78,0.18), transparent 35%),
+        radial-gradient(circle at bottom left, rgba(103,116,101,0.22), transparent 35%),
+        var(--dark);
+      color: var(--white);
+      font-family: var(--font);
+    }
+
+    .card {
+      width: min(100%, 640px);
+      padding: 48px 36px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 300;
+      line-height: 1.1;
+    }
+
+    h1 strong {
+      font-weight: 700;
+      color: var(--terra);
+    }
+
+    p {
+      margin: 0 auto 28px;
+      max-width: 460px;
+      color: rgba(255,255,255,0.74);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    a {
+      display: inline-block;
+      padding: 14px 24px;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+    }
+
+    .primary {
+      background: var(--terra);
+      color: var(--white);
+    }
+
+    .secondary {
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.8);
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>მოთხოვნა <strong>მიღებულია</strong></h1>
+    <p>თქვენი ინფორმაცია წარმატებით გაიგზავნა. მალე დაგიკავშირდებით დეტალების დასაზუსტებლად.</p>
+    <div class="actions">
+      <a class="primary" href="/">მთავარ გვერდზე დაბრუნება</a>
+      <a class="secondary" href="https://www.facebook.com/profile.php?id=61588337703082" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </main>
+</body>
+</html>

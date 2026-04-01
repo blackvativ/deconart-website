@@ -18,6 +18,7 @@ Why this fits this project:
 The contact form is prepared for `Netlify Forms`:
 
 - Form name: `project-request`
+- Uses standard HTML `POST` submission to `/thanks.html` for reliable Netlify handling
 - Captures contact form fields
 - Includes an `email` field so Netlify notification emails can use `Reply-To`
 - Also submits calculator data:

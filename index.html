@@ -1202,6 +1202,8 @@
     id="contactForm"
     name="project-request"
     method="POST"
+    action="/thanks.html"
+    netlify
     data-netlify="true"
     netlify-honeypot="bot-field"
   >
@@ -1295,44 +1297,12 @@
   const formStatus = document.getElementById('formStatus');
   const submitButton = contactForm.querySelector('.btn-submit');
 
-  function encodeForm(data) {
-    return new URLSearchParams(data).toString();
-  }
-
-  contactForm.addEventListener('submit', async event => {
-    event.preventDefault();
+  contactForm.addEventListener('submit', () => {
     calculate();
-
     submitButton.disabled = true;
     submitButton.textContent = 'იგზავნება...';
-    formStatus.textContent = '';
+    formStatus.textContent = 'მოთხოვნა იგზავნება...';
     formStatus.classList.remove('is-error');
-
-    const formData = new FormData(contactForm);
-
-    try {
-      const response = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encodeForm(formData)
-      });
-
-      if (!response.ok) {
-        throw new Error('Submission failed');
-      }
-
-      contactForm.reset();
-      calculate();
-
-      submitButton.disabled = false;
-      submitButton.textContent = 'გაგზავნა';
-      formStatus.textContent = 'მოთხოვნა წარმატებით გაიგზავნა. მალე დაგიკავშირდებით.';
-    } catch (error) {
-      submitButton.disabled = false;
-      submitButton.textContent = 'გაგზავნა';
-      formStatus.textContent = 'გაგზავნა ვერ შესრულდა. სცადეთ თავიდან ან მოგვწერეთ Facebook-ზე.';
-      formStatus.classList.add('is-error');
-    }
   });
 
   // Drag-to-scroll finish strip
