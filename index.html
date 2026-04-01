@@ -86,6 +86,18 @@
       letter-spacing: 0.06em;
     }
 
+    .nav-mobile-cta {
+      display: none;
+      background: var(--terra);
+      color: var(--white);
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 2px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
     /* ─── HERO ─── */
     .hero {
       min-height: 100vh;
@@ -824,10 +836,10 @@
       z-index: 200;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 0;
       background: #f05a1a;
       color: var(--white);
-      padding: 14px 22px;
+      padding: 14px;
       border-radius: 100px;
       text-decoration: none;
       font-size: 13px;
@@ -835,15 +847,32 @@
       letter-spacing: 0.04em;
       font-family: var(--font);
       box-shadow: 0 4px 20px rgba(240,90,26,0.4);
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s, padding 0.2s, gap 0.2s;
     }
 
-    .fab-call:hover {
+    .fab-call:hover,
+    .fab-call:focus-visible {
+      gap: 10px;
+      padding: 14px 18px;
       transform: translateY(-2px);
       box-shadow: 0 8px 28px rgba(240,90,26,0.5);
     }
 
     .fab-call svg { flex-shrink: 0; }
+
+    .fab-call span {
+      max-width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      opacity: 0;
+      transition: max-width 0.2s ease, opacity 0.2s ease;
+    }
+
+    .fab-call:hover span,
+    .fab-call:focus-visible span {
+      max-width: 120px;
+      opacity: 1;
+    }
 
     /* ─── FB LINK ─── */
     .fb-link {
@@ -879,6 +908,7 @@
     @media (max-width: 900px) {
       nav { padding: 16px 24px; }
       nav ul { display: none; }
+      .nav-mobile-cta { display: inline-block; }
       section { padding: 68px 24px; }
       .hero { padding: 120px 24px 200px; }
       .hero-prices { right: 24px; bottom: 28px; }
@@ -895,9 +925,36 @@
 
     @media (max-width: 600px) {
       h1 { font-size: 34px; }
-      .hero-prices { position: static; flex-direction: row; margin-top: 36px; }
+      nav {
+        padding: 14px 18px;
+      }
+      .logo img {
+        height: 34px;
+      }
+      .nav-mobile-cta {
+        padding: 9px 12px;
+        font-size: 10px;
+      }
+      .hero {
+        padding: 108px 24px 56px;
+      }
+      .hero-prices {
+        position: static;
+        margin-top: 32px;
+        align-items: stretch;
+        width: 100%;
+      }
+      .price-badge {
+        width: 100%;
+        text-align: left;
+      }
       .process-steps { grid-template-columns: 1fr; }
       .calc-panel, .contact-form { padding: 28px 22px; }
+      .fab-call {
+        right: 18px;
+        bottom: 18px;
+        padding: 12px;
+      }
     }
   </style>
 </head>
@@ -913,6 +970,7 @@
     <li><a href="#calculator">კალკულატორი</a></li>
     <li><a href="#contact" class="nav-cta">შეფასება</a></li>
   </ul>
+  <a href="#contact" class="nav-mobile-cta">შეფასება</a>
 </nav>
 
 <!-- HERO -->
@@ -1267,9 +1325,9 @@
 </footer>
 
 <!-- FLOATING CALL BUTTON — replace tel: with your number e.g. tel:+995551234567 -->
-<a href="tel:+995" class="fab-call">
+<a href="tel:+995577789990" class="fab-call" aria-label="დარეკეთ +995577789990">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .82h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-  დარეკეთ
+  <span>დარეკეთ</span>
 </a>
 
 <script>
@@ -1317,6 +1375,10 @@
   let lastY = 0;
   const nav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => {
+    if (window.innerWidth <= 900) {
+      nav.style.transform = 'translateY(0)';
+      return;
+    }
     const y = window.scrollY;
     nav.style.transform = (y > lastY && y > 80) ? 'translateY(-100%)' : 'translateY(0)';
     lastY = y;
