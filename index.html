@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DECON ART — მიკროცემენტი და ბეტონის ეფექტი</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @font-face {
+      font-family: 'Smartdoor';
+      src: url('Smartdoor-font.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --sage: #677465;
+      --terra: #be654e;
+      --white: #ffffff;
+      --off-white: #f5f3f0;
+      --dark: #1a1916;
+      --mid: #2e2d2a;
+      --light-sage: rgba(103,116,101,0.12);
+      --font: 'Smartdoor', 'Noto Sans Georgian', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--dark);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: transform 0.3s;
+    }
+
+    .logo img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    nav ul a {
+      text-decoration: none;
+      color: rgba(0,0,0,0.45);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--dark); }
+
+    .nav-cta {
+      background: var(--terra) !important;
+      color: var(--white) !important;
+      padding: 10px 22px;
+      border-radius: 2px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 140px 48px 80px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 80% 40%, rgba(190,101,78,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 70% at 20% 70%, rgba(103,116,101,0.15) 0%, transparent 60%),
+        var(--dark);
+    }
+
+    .hero-texture {
+      position: absolute;
+      inset: 0;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 700px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 28px;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--terra);
+    }
+
+    h1 {
+      font-size: clamp(38px, 5.5vw, 76px);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+
+    h1 strong {
+      font-weight: 700;
+      display: block;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--terra);
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.48);
+      max-width: 460px;
+      margin-bottom: 44px;
+      line-height: 1.9;
+    }
+
+    .hero-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 44px;
+    }
+
+    .pill {
+      padding: 7px 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--terra);
+      color: var(--white);
+      padding: 15px 34px;
+      border-radius: 2px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+      display: inline-block;
+      font-family: var(--font);
+    }
+
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    .btn-outline {
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .btn-outline:hover { color: var(--white); }
+
+    .hero-prices {
+      position: absolute;
+      right: 48px;
+      bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-end;
+    }
+
+    .price-badge {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      padding: 16px 24px;
+      border-radius: 3px;
+      text-align: right;
+    }
+
+    .price-badge .type {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 5px;
+    }
+
+    .price-badge .amount {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .price-badge .amount span {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.38);
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 96px 48px; }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      max-width: 44px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h2 {
+      font-size: clamp(26px, 3.5vw, 44px);
+      font-weight: 300;
+      line-height: 1.18;
+    }
+
+    h2 strong { font-weight: 700; }
+
+    /* ─── ABOUT ─── */
+    .about {
+      background: var(--mid);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: rgba(255,255,255,0.52);
+      margin-top: 22px;
+      font-size: 14px;
+      line-height: 1.95;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.03);
+      padding: 30px 26px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .stat-num {
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--terra);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.38);
+    }
+
+    /* ─── SERVICES ─── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2px;
+      margin-top: 52px;
+    }
+
+    .service-card {
+      background: var(--mid);
+      padding: 44px 34px;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: border-color 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--terra);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover { border-color: rgba(255,255,255,0.09); }
+
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--light-sage);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 26px;
+      font-size: 18px;
+    }
+
+    .service-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.42);
+      line-height: 1.85;
+      margin-bottom: 22px;
+    }
+
+    .service-price {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--terra);
+    }
+
+    .service-price small {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.32);
+    }
+
+    /* ─── FINISHES GALLERY ─── */
+    .finishes {
+      background: var(--dark);
+      padding-bottom: 0;
+      overflow: hidden;
+    }
+
+    .finishes-header { padding: 0 48px 44px; }
+
+    .finishes-strip {
+      display: flex;
+      gap: 3px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 48px 56px;
+      cursor: grab;
+    }
+
+    .finishes-strip:active { cursor: grabbing; }
+    .finishes-strip::-webkit-scrollbar { height: 2px; }
+    .finishes-strip::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); }
+    .finishes-strip::-webkit-scrollbar-thumb { background: var(--terra); border-radius: 2px; }
+
+    .finish-card {
+      flex: 0 0 255px;
+      scroll-snap-align: start;
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .finish-card img {
+      width: 100%;
+      height: 370px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    .finish-card:hover img { transform: scale(1.05); }
+
+    .finish-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(26,25,22,0.9) 0%, transparent 100%);
+      padding: 36px 20px 20px;
+    }
+
+    .finish-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 3px;
+    }
+
+    .finish-desc {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.42);
+    }
+
+    .finish-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--terra);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+      z-index: 1;
+    }
+
+    .finish-card:hover::before { transform: scaleX(1); }
+
+    /* ─── CALCULATOR ─── */
+    .calculator {
+      background: var(--off-white);
+      color: var(--dark);
+    }
+
+    .calculator .section-label { color: var(--terra); }
+
+    .calc-wrapper {
+      margin-top: 52px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .calc-panel {
+      background: var(--white);
+      border-radius: 3px;
+      padding: 44px 38px;
+      box-shadow: 0 2px 32px rgba(0,0,0,0.07);
+    }
+
+    .calc-panel h3 {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .calc-subtitle {
+      font-size: 13px;
+      color: rgba(0,0,0,0.38);
+      margin-bottom: 30px;
+    }
+
+    /* ─── SHARED FORM ELEMENTS ─── */
+    .form-group { margin-bottom: 20px; }
+
+    .form-group label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: rgba(0,0,0,0.45);
+    }
+
+    .field {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 2px;
+      font-size: 14px;
+      font-family: var(--font);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+      display: block;
+    }
+
+    /* Light context (calculator) */
+    .field-light {
+      border: 1px solid rgba(0,0,0,0.12);
+      color: var(--dark);
+      background: var(--off-white);
+    }
+
+    .field-light:focus { border-color: var(--terra); background: #fff; }
+
+    /* Dark context (contact form) */
+    .field-dark {
+      border: 1px solid rgba(255,255,255,0.16);
+      color: var(--white);
+      background: rgba(255,255,255,0.07);
+    }
+
+    .field-dark:focus { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.1); }
+    .field-dark::placeholder { color: rgba(255,255,255,0.28); }
+
+    .select-wrap {
+      position: relative;
+    }
+
+    .select-wrap::after {
+      content: '';
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      pointer-events: none;
+    }
+
+    .select-wrap.light::after { border-top: 5px solid rgba(0,0,0,0.35); }
+    .select-wrap.dark::after { border-top: 5px solid rgba(255,255,255,0.4); }
+
+    .field-dark option { background: #3a3832; }
+
+    textarea.field {
+      resize: vertical;
+      min-height: 96px;
+    }
+
+    .calc-result {
+      background: var(--dark);
+      color: var(--white);
+      border-radius: 3px;
+      padding: 32px 28px;
+      margin-top: 20px;
+    }
+
+    .result-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .result-line strong {
+      color: var(--white);
+      font-size: 14px;
+    }
+
+    .result-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 18px;
+      margin-top: 6px;
+    }
+
+    .result-total .label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+    }
+
+    .result-total .price {
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--terra);
+    }
+
+    .result-note {
+      font-size: 11px;
+      color: rgba(255,255,255,0.22);
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .calc-info { padding: 8px 0; }
+
+    .calc-info h3 {
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 1.45;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+
+    .calc-info h3 strong { font-weight: 700; }
+
+    .calc-info > p {
+      font-size: 13px;
+      color: rgba(0,0,0,0.45);
+      line-height: 1.85;
+    }
+
+    .info-items {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .info-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--terra);
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    .info-item p {
+      margin: 0;
+      font-size: 13px;
+      color: rgba(0,0,0,0.55);
+      line-height: 1.7;
+    }
+
+    /* ─── PROCESS ─── */
+    .process { background: var(--dark); }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 52px;
+    }
+
+    .step {
+      padding: 38px 30px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .step-num {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--terra);
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+
+    .step h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.8;
+    }
+
+    /* ─── CONTACT ─── */
+    .contact {
+      background: var(--sage);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .contact .section-label { color: rgba(255,255,255,0.55); }
+    .contact h2 { color: var(--white); }
+
+    .contact-text > p {
+      color: rgba(255,255,255,0.62);
+      margin-top: 18px;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .contact-details {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .detail {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      font-size: 14px;
+      color: rgba(255,255,255,0.62);
+    }
+
+    .detail-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 14px;
+    }
+
+    .contact-form {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 3px;
+      padding: 44px 38px;
+    }
+
+    .contact-form .form-group label {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: var(--terra);
+      color: var(--white);
+      border: none;
+      border-radius: 2px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: opacity 0.2s;
+      margin-top: 4px;
+    }
+
+    .btn-submit:hover { opacity: 0.85; }
+    .btn-submit:disabled { background: var(--sage); opacity: 0.7; cursor: default; }
+
+    .form-status {
+      min-height: 22px;
+      margin-top: 14px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.78);
+    }
+
+    .form-status.is-error {
+      color: #ffd7cd;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--white);
+      border-top: 1px solid rgba(0,0,0,0.07);
+      padding: 28px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-size: 12px;
+      color: rgba(0,0,0,0.35);
+    }
+
+    .footer-logo img {
+      height: 28px;
+      width: auto;
+      opacity: 0.6;
+    }
+
+    /* ─── FLOATING CALL BUTTON ─── */
+    .fab-call {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f05a1a;
+      color: var(--white);
+      padding: 14px 22px;
+      border-radius: 100px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      font-family: var(--font);
+      box-shadow: 0 4px 20px rgba(240,90,26,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .fab-call:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(240,90,26,0.5);
+    }
+
+    .fab-call svg { flex-shrink: 0; }
+
+    /* ─── FB LINK ─── */
+    .fb-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .fb-link:hover { color: var(--white); }
+
+    .fb-link-dark {
+      color: rgba(0,0,0,0.4);
+    }
+
+    .fb-link-dark:hover { color: var(--dark); }
+
+    .fb-icon {
+      width: 32px;
+      height: 32px;
+      background: #1877F2;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      nav ul { display: none; }
+      section { padding: 68px 24px; }
+      .hero { padding: 120px 24px 200px; }
+      .hero-prices { right: 24px; bottom: 28px; }
+      .about, .contact { grid-template-columns: 1fr; gap: 40px; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .calc-wrapper { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      footer { flex-direction: column; gap: 10px; text-align: center; }
+      .finishes-strip { padding: 0 24px 44px; }
+      .finishes-header { padding: 0 24px 36px; }
+      .finish-card { flex: 0 0 200px; }
+      .finish-card img { height: 300px; }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 34px; }
+      .hero-prices { position: static; flex-direction: row; margin-top: 36px; }
+      .process-steps { grid-template-columns: 1fr; }
+      .calc-panel, .contact-form { padding: 28px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="logo"><img src="DECON ART LOGO.png" alt="Decon Art" /></div>
+  <ul>
+    <li><a href="#about">ჩვენს შესახებ</a></li>
+    <li><a href="#services">სერვისები</a></li>
+    <li><a href="#finishes">ფინიშები</a></li>
+    <li><a href="#calculator">კალკულატორი</a></li>
+    <li><a href="#contact" class="nav-cta">შეფასება</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-texture"></div>
+  <div class="hero-content">
+    <div class="hero-tag">თბილისი, საქართველო</div>
+    <h1>
+      <strong>პრემიუმ მიკროცემენტი</strong>
+      და ბეტონის ეფექტი<br>
+      <em>ზედაპირებზე</em>
+    </h1>
+    <p class="hero-sub">
+      ოფისებისთვის, კომერციული სივრცეებისთვის და თანამედროვე ბინებისთვის.<br>
+      სისტემა · პასუხისმგებლობა · ხარისხი.
+    </p>
+    <div class="hero-pills">
+      <div class="pill">ინტერიერის კედლები</div>
+      <div class="pill">ექსტერიერის ფასადები</div>
+      <div class="pill">იატაკი</div>
+      <div class="pill">კომერციული სივრცეები</div>
+    </div>
+    <div class="hero-actions">
+      <a href="#calculator" class="btn-primary">ფასის გამოთვლა</a>
+      <a href="#contact" class="btn-outline">შეფასების მოთხოვნა →</a>
+      <a href="https://www.facebook.com/profile.php?id=61588337703082" target="_blank" rel="noopener" class="fb-link" style="color:rgba(255,255,255,0.5);">
+        <div class="fb-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M24 12.073C24 5.406 18.627 0 12 0S0 5.406 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </div>
+        Facebook
+      </a>
+    </div>
+  </div>
+  <div class="hero-prices">
+    <div class="price-badge">
+      <div class="type">ინტერიერი</div>
+      <div class="amount">90₾<span>/მ²-დან</span></div>
+    </div>
+    <div class="price-badge">
+      <div class="type">ექსტერიერი</div>
+      <div class="amount">110₾<span>/მ²-დან</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-text">
+    <div class="section-label">Decon Art-ის შესახებ</div>
+    <h2>ვქმნით ზედაპირებს, <strong>რომლებიც სივრცეს განსაზღვრავს</strong></h2>
+    <p>ხშირად ინტერიერის განახლებისთვის სრული რემონტი არ არის საჭირო. სწორად შერჩეული კედლის დასრულება უკვე ცვლის გარემოს შეგრძნებას — სივრცე ხდება უფრო სუფთა, უფრო თანამედროვე და უფრო დახვეწილი.</p>
+    <p>DECON ART ქმნის პრემიუმ მიკროცემენტის კედლებს ინტერიერისა და ექსტერიერისთვის საქართველოში. ვმუშაობთ სიზუსტით, პროფესიონალური მასალებითა და დადასტურებული სისტემებით.</p>
+  </div>
+  <div class="about-stats">
+    <div class="stat">
+      <div class="stat-num">200+</div>
+      <div class="stat-label">დასრულებული პროექტი</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5+</div>
+      <div class="stat-label">წლის გამოცდილება</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">პრემიუმ მასალები</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2 წ.</div>
+      <div class="stat-label">ხარისხის გარანტია</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">ჩვენი სერვისები</div>
+  <h2>რას <strong>ვაკეთებთ</strong></h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">◻</div>
+      <h3>ინტერიერის მიკროცემენტი</h3>
+      <p>შეუფერხებელი, უმტვერო მიკროცემენტის დასრულება კედლებისთვის, ჭერებისთვის და იატაკისთვის ოფისებში, სახლებსა და კომერციულ სივრცეებში. მინიმალური სისქე, მაქსიმალური ეფექტი.</p>
+      <div class="service-price">90₾ <small>მ²-ზე / საწყისი ფასი</small></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">◈</div>
+      <h3>ექსტერიერის ბეტონის ეფექტი</h3>
+      <p>ამინდგამძლე ბეტონისა და მიკროცემენტის ეფექტი ფასადებისთვის, ტერასებისთვის და გარე კედლებისთვის. შექმნილია საქართველოს კლიმატური პირობებისთვის.</p>
+      <div class="service-price">110₾ <small>მ²-ზე / საწყისი ფასი</small></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">▣</div>
+      <h3>კომერციული სივრცეები</h3>
+      <p>მასშტაბური სამუშაოები ოფისებისთვის, რესტორნებისთვის, სასტუმროებისთვის და სავაჭრო სივრცეებისთვის. სუფთა შესრულება მინიმალური ჩარევით.</p>
+      <div class="service-price">ინდივიდუალური <small>ფასი</small></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">◉</div>
+      <h3>კონსულტაცია და დიზაინი</h3>
+      <p>არ იცით რომელი დასრულება შეეფერება თქვენს სივრცეს? ვთავაზობთ ადგილზე კონსულტაციებს, მასალის ნიმუშებს და დიზაინის სახელმძღვანელოს — დამატებითი გადასახადის გარეშე.</p>
+      <div class="service-price">უფასო <small>კონსულტაცია</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINISHES GALLERY -->
+<section class="finishes" id="finishes">
+  <div class="finishes-header">
+    <div class="section-label">ფინიშის ნიმუშები</div>
+    <h2>ფერისა და ტექსტურის <strong>პალიტრა</strong></h2>
+  </div>
+  <div class="finishes-strip" id="finishStrip">
+    <div class="finish-card">
+      <img src="IMG_8495.jpg" alt="Sage Mist" loading="lazy" />
+      <div class="finish-overlay">
+        <div class="finish-name">Sage Mist</div>
+        <div class="finish-desc">მიკროცემენტი · ინტერიერი</div>
+      </div>
+    </div>
+    <div class="finish-card">
+      <img src="IMG_8496.jpg" alt="Linen" loading="lazy" />
+      <div class="finish-overlay">
+        <div class="finish-name">Linen</div>
+        <div class="finish-desc">ბეტონის ეფექტი · ინტერიერი</div>
+      </div>
+    </div>
+    <div class="finish-card">
+      <img src="IMG_8497.jpg" alt="Pearl" loading="lazy" />
+      <div class="finish-overlay">
+        <div class="finish-name">Pearl</div>
+        <div class="finish-desc">მიკროცემენტი · ინტ. / ექსტ.</div>
+      </div>
+    </div>
+    <div class="finish-card">
+      <img src="IMG_8498.jpg" alt="Warm Stone" loading="lazy" />
+      <div class="finish-overlay">
+        <div class="finish-name">Warm Stone</div>
+        <div class="finish-desc">ბეტონის ეფექტი · ინტ. / ექსტ.</div>
+      </div>
+    </div>
+    <div class="finish-card">
+      <img src="IMG_8499.jpg" alt="Glacier" loading="lazy" />
+      <div class="finish-overlay">
+        <div class="finish-name">Glacier</div>
+        <div class="finish-desc">მიკროცემენტი · ინტერიერი</div>
+      </div>
+    </div>
+    <div class="finish-card">
+      <img src="IMG_8500.jpg" alt="Forest Sage" loading="lazy" />
+      <div class="finish-overlay">
+        <div class="finish-name">Forest Sage</div>
+        <div class="finish-desc">მიკროცემენტი · ინტ. / ექსტ.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="calculator" id="calculator">
+  <div class="section-label">პროექტის შეფასება</div>
+  <h2>ფასის <strong>კალკულატორი</strong></h2>
+  <div class="calc-wrapper">
+    <div class="calc-panel">
+      <h3>ფასის გამოთვლა</h3>
+      <p class="calc-subtitle">შეიყვანეთ ზედაპირის მონაცემები სავარაუდო ფასისთვის</p>
+
+      <div class="form-group">
+        <label for="calc-type">ზედაპირის ტიპი</label>
+        <div class="select-wrap light">
+          <select id="calc-type" class="field field-light" onchange="calculate()">
+            <option value="interior">ინტერიერი — 90₾/მ²-დან</option>
+            <option value="exterior">ექსტერიერი — 110₾/მ²-დან</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="calc-area">საერთო ფართი (მ²)</label>
+        <input type="number" id="calc-area" class="field field-light" value="30" min="1" max="5000" placeholder="მაგ. 30" oninput="calculate()" />
+      </div>
+
+      <div class="form-group">
+        <label for="calc-finish">სირთულის ხარისხი</label>
+        <div class="select-wrap light">
+          <select id="calc-finish" class="field field-light" onchange="calculate()">
+            <option value="1">სტანდარტული — სწორი ზედაპირები</option>
+            <option value="1.15">საშუალო — გარკვეული დეტალები</option>
+            <option value="1.3">კომპლექსური — თაღები, მრუდი ზედ.</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-result">
+        <div class="result-line">
+          <span>საბაზო ტარიფი</span>
+          <strong id="res-rate">90₾/მ²</strong>
+        </div>
+        <div class="result-line">
+          <span>ზედაპირის ფართი</span>
+          <strong id="res-area">30 მ²</strong>
+        </div>
+        <div class="result-line">
+          <span>სირთულის კოეფ.</span>
+          <strong id="res-factor">×1.00</strong>
+        </div>
+        <div class="result-total">
+          <div class="label">სავარაუდო ჯამი</div>
+          <div class="price" id="res-total">2,700₾</div>
+        </div>
+        <div class="result-note">მხოლოდ სავარაუდო. საბოლოო ფასი დადასტურდება ადგილის შემოწმების შემდეგ.</div>
+      </div>
+    </div>
+
+    <div class="calc-info">
+      <h3>რა <strong>შედის ფასში?</strong></h3>
+      <p>ჩვენი დასახელებული ტარიფი მოიცავს ყველაფერს — სტანდარტული სამუშაოებისთვის დამატებითი ხარჯები არ არის.</p>
+      <div class="info-items">
+        <div class="info-item"><div class="info-dot"></div><p>ზედაპირის მომზადება და პრიმინგი</p></div>
+        <div class="info-item"><div class="info-dot"></div><p>პროფესიონალური მიკროცემენტი / ბეტონის ეფექტის მასალა</p></div>
+        <div class="info-item"><div class="info-dot"></div><p>მრავალფენიანი გამოყენება სერტიფიცირებული ოსტატების მიერ</p></div>
+        <div class="info-item"><div class="info-dot"></div><p>საბოლოო სარჩელი (მატ, სატინი ან გლოსი — თქვენი არჩევანი)</p></div>
+        <div class="info-item"><div class="info-dot"></div><p>სივრცის დასუფთავება და საბოლოო შემოწმება</p></div>
+        <div class="info-item"><div class="info-dot"></div><p>2-წლიანი სამუშაო გარანტია</p></div>
+      </div>
+      <br>
+      <a href="#contact" class="btn-primary">ზუსტი შეფასების მოთხოვნა</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="section-label">როგორ მუშაობს</div>
+  <h2>განაცხადიდან — <strong>მზა ზედაპირამდე</strong></h2>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h4>დაგვიკავშირდით</h4>
+      <p>გამოგვიგზავნეთ თქვენი მ² და მდებარეობა. გიპასუხებთ 24 საათის განმავლობაში.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h4>ადგილის დათვალიერება</h4>
+      <p>ჩვენი სპეციალისტი ეწვევა თქვენს ობიექტს, შეაფასებს ზედაპირს და წარმოგიდგენთ მასალის ნიმუშებს.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h4>სამუშაოების შესრულება</h4>
+      <p>სუფთა, ზუსტი, გრაფიკის შესაბამისი შესრულება ჩვენი გამოცდილი გუნდის მიერ. მინიმალური ჩარევა.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h4>ჩაბარება</h4>
+      <p>საბოლოო შემოწმება თქვენთან ერთად, მოვლის ინსტრუქციები და 2-წლიანი გარანტია.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-text">
+    <div class="section-label">დაგვიკავშირდით</div>
+    <h2>მზად ხართ <strong>შეცვალოთ</strong> თქვენი სივრცე?</h2>
+    <p>გამოგვიგზავნეთ თქვენი მ² და მდებარეობა — გიპასუხებთ სრული შეფასებით, ჩვეულებრივ 24 საათის განმავლობაში.</p>
+    <div class="contact-details">
+      <div class="detail">
+        <div class="detail-icon">📍</div>
+        <div>თბილისი, იოსელიანის ქ. 107<br>საქართველო</div>
+      </div>
+      <div class="detail">
+        <div class="detail-icon">✉</div>
+        <div>მოგვწერეთ უფასო შეფასებისთვის</div>
+      </div>
+      <div class="detail">
+        <a href="https://www.facebook.com/profile.php?id=61588337703082" target="_blank" rel="noopener" class="fb-link">
+          <div class="fb-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M24 12.073C24 5.406 18.627 0 12 0S0 5.406 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          </div>
+          Decon Art — Facebook
+        </a>
+      </div>
+    </div>
+  </div>
+  <form
+    class="contact-form"
+    id="contactForm"
+    name="project-request"
+    method="POST"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+  >
+    <input type="hidden" name="form-name" value="project-request" />
+    <input type="hidden" name="bot-field" />
+    <input type="hidden" name="estimated_rate" id="lead-estimated-rate" />
+    <input type="hidden" name="estimated_area" id="lead-estimated-area" />
+    <input type="hidden" name="complexity_factor" id="lead-complexity-factor" />
+    <input type="hidden" name="estimated_total" id="lead-estimated-total" />
+
+    <div class="form-group">
+      <label>თქვენი სახელი</label>
+      <input type="text" name="name" class="field field-dark" placeholder="სრული სახელი" required />
+    </div>
+    <div class="form-group">
+      <label>ტელეფონი / ელ-ფოსტა</label>
+      <input type="text" name="contact" class="field field-dark" placeholder="როგორ დაგიკავშირდეთ?" required />
+    </div>
+    <div class="form-group">
+      <label>მდებარეობა</label>
+      <input type="text" name="location" class="field field-dark" placeholder="უბანი / მისამართი" required />
+    </div>
+    <div class="form-group">
+      <label>პროექტის ტიპი</label>
+      <div class="select-wrap dark">
+        <select name="project_type" class="field field-dark" required>
+          <option value="ინტერიერი">ინტერიერი</option>
+          <option value="ექსტერიერი">ექსტერიერი</option>
+          <option value="ინტერიერი და ექსტერიერი">ინტერიერი და ექსტერიერი</option>
+          <option value="კომერციული / ოფისი">კომერციული / ოფისი</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>სავარაუდო ფართი (მ²)</label>
+      <input type="number" name="project_area" class="field field-dark" placeholder="მაგ. 45" min="1" max="5000" required />
+    </div>
+    <div class="form-group">
+      <label>დამატებითი შენიშვნები</label>
+      <textarea name="notes" class="field field-dark" placeholder="აღწერეთ თქვენი პროექტი — ზედაპირის ტიპი, სასურველი დასრულება, ვადები..."></textarea>
+    </div>
+    <button class="btn-submit" type="submit">გაგზავნა</button>
+    <p class="form-status" id="formStatus" aria-live="polite"></p>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><img src="DECON ART LOGO.png" alt="Decon Art" /></div>
+  <p>მიკროცემენტი და ბეტონის ეფექტი · თბილისი, საქართველო<br>ინტერიერი 90₾/მ²-დან · ექსტერიერი 110₾/მ²-დან</p>
+  <a href="https://www.facebook.com/profile.php?id=61588337703082" target="_blank" rel="noopener" class="fb-link fb-link-dark">
+    <div class="fb-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M24 12.073C24 5.406 18.627 0 12 0S0 5.406 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+    </div>
+    Facebook
+  </a>
+</footer>
+
+<!-- FLOATING CALL BUTTON — replace tel: with your number e.g. tel:+995551234567 -->
+<a href="tel:+995" class="fab-call">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .82h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+  დარეკეთ
+</a>
+
+<script>
+  function calculate() {
+    const type = document.getElementById('calc-type').value;
+    const area = parseFloat(document.getElementById('calc-area').value) || 0;
+    const factor = parseFloat(document.getElementById('calc-finish').value) || 1;
+    const baseRate = type === 'interior' ? 90 : 110;
+    const total = Math.round(baseRate * area * factor);
+
+    document.getElementById('res-rate').textContent = baseRate + '₾/მ²';
+    document.getElementById('res-area').textContent = area + ' მ²';
+    document.getElementById('res-factor').textContent = '×' + factor.toFixed(2);
+    document.getElementById('res-total').textContent = total.toLocaleString() + '₾';
+
+    document.getElementById('lead-estimated-rate').value = baseRate + '₾/მ²';
+    document.getElementById('lead-estimated-area').value = area + ' მ²';
+    document.getElementById('lead-complexity-factor').value = factor.toFixed(2);
+    document.getElementById('lead-estimated-total').value = total.toLocaleString() + '₾';
+  }
+
+  calculate();
+
+  const contactForm = document.getElementById('contactForm');
+  const formStatus = document.getElementById('formStatus');
+  const submitButton = contactForm.querySelector('.btn-submit');
+
+  function encodeForm(data) {
+    return new URLSearchParams(data).toString();
+  }
+
+  contactForm.addEventListener('submit', async event => {
+    event.preventDefault();
+    calculate();
+
+    submitButton.disabled = true;
+    submitButton.textContent = 'იგზავნება...';
+    formStatus.textContent = '';
+    formStatus.classList.remove('is-error');
+
+    const formData = new FormData(contactForm);
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encodeForm(formData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Submission failed');
+      }
+
+      contactForm.reset();
+      calculate();
+
+      submitButton.disabled = false;
+      submitButton.textContent = 'გაგზავნა';
+      formStatus.textContent = 'მოთხოვნა წარმატებით გაიგზავნა. მალე დაგიკავშირდებით.';
+    } catch (error) {
+      submitButton.disabled = false;
+      submitButton.textContent = 'გაგზავნა';
+      formStatus.textContent = 'გაგზავნა ვერ შესრულდა. სცადეთ თავიდან ან მოგვწერეთ Facebook-ზე.';
+      formStatus.classList.add('is-error');
+    }
+  });
+
+  // Drag-to-scroll finish strip
+  const strip = document.getElementById('finishStrip');
+  let isDown = false, startX, scrollLeft;
+  strip.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - strip.offsetLeft; scrollLeft = strip.scrollLeft; });
+  strip.addEventListener('mouseleave', () => { isDown = false; });
+  strip.addEventListener('mouseup', () => { isDown = false; });
+  strip.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); strip.scrollLeft = scrollLeft - (e.pageX - strip.offsetLeft - startX) * 1.5; });
+
+  // Nav hide on scroll down
+  let lastY = 0;
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    nav.style.transform = (y > lastY && y > 80) ? 'translateY(-100%)' : 'translateY(0)';
+    lastY = y;
+  });
+</script>
+</body>
+</html>
