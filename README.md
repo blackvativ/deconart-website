@@ -19,6 +19,7 @@ The contact form is prepared for `Netlify Forms`:
 
 - Form name: `project-request`
 - Captures contact form fields
+- Includes an `email` field so Netlify notification emails can use `Reply-To`
 - Also submits calculator data:
   - `estimated_rate`
   - `estimated_area`
