@@ -1,6 +1,9 @@
 # DeconArt — next conversion job
 
-The current website intentionally sells the verified wall service and collects interest for the table collection without inventing product details.
+The current website sells the approved microcement scope (wall, floor, wet
+areas, selective ceilings, stairs, skirting, and iron doors) and keeps the
+table collection as a separate prelaunch interest path without inventing
+product details.
 
 ## Confirm before launching table sales
 

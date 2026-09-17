@@ -1,6 +1,6 @@
 # Decon Art Website
 
-Static landing page for DECON ART with a calculator and a lead form.
+Static sales site for DECON ART microcement services with a calculator and Netlify lead form.
 
 ## Current environment
 
@@ -13,6 +13,21 @@ Static landing page for DECON ART with a calculator and a lead form.
 This is the public marketing site. The separate private recipe catalog at
 `deconart-finishes.vercel.app` is a different application and is not deployed
 from this repository.
+
+## Public sales scope
+
+The authoritative public scope is `Microcement_Sales_Scope_Final_GE.docx`.
+The site offers wall work (90 GEL/m²), floor/wet-area/selective ceiling work
+(140 GEL/m²), iron doors (1,200 GEL/door), skirting (30 GEL/linear m), and
+individually priced stairs, complex details, and heights. It serves residential
+and commercial projects in Tbilisi and environs. Standard jobs have a minimum
+of 30 m² or 2,500 GEL. DeconArt is currently not a VAT payer, so VAT is not
+added to the published prices.
+
+The calculator deliberately covers only wall, floor, wet-area, and selective
+ceiling rates. It applies `max(rate × area, 2500)` and never invents a
+complexity multiplier. Furniture and nonstandard surfaces, including the
+prelaunch table collection, remain a separate interest path.
 
 ## Local development
 
@@ -56,7 +71,13 @@ The contact form is prepared for `Netlify Forms`:
 
 - Form name: `project-request`
 - Uses standard HTML `POST` submission to `/thanks.html` for reliable Netlify handling
-- Captures name, phone, project type, area, location, and an optional note
+- Captures name, phone, residential/commercial space type, project type,
+  quantity with its unit, location, current substrate, desired start, desired
+  finish, known issues, and an optional message
+- Requires the source-document intake fields and tells visitors to enter
+  "unknown" when a detail has not yet been decided
+- Explains that form data is processed through Netlify and that Messenger
+  photos should use the same name and phone so the two submissions can be matched
 - Also submits calculator context when the visitor carries an estimate into the form:
   - `estimated_rate`
   - `estimated_total`
@@ -76,7 +97,9 @@ Netlify path:
 
 1. Run `npm run check && npm run build`.
 2. Review the page at desktop and mobile widths.
-3. Confirm the 90 GEL/m² and 110 GEL/m² starting prices are still current.
+3. Confirm the authoritative 90 GEL/m² wall and 140 GEL/m² floor/wet-area/
+   selective-ceiling rates, 2,500 GEL project minimum, and non-calculator
+   service details are still current.
 4. Push only after publication is approved.
 5. Verify `https://deconart.ge`, `/robots.txt`, `/sitemap.xml`, and `/og.png`.
 6. Confirm Netlify still recognizes the `project-request` form.

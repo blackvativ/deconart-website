@@ -21,8 +21,15 @@ Read this file before changing the DeconArt website.
 ## Current public facts
 
 - Brand: DECON ART / Deconart (formerly DecoNut; renamed 2026-08-05).
-- Primary offer: microcement and concrete-effect interior/exterior wall work.
-- Published starting prices: interior 90 GEL/m²; exterior 110 GEL/m².
+- Primary offer: microcement services for residential and commercial interiors
+  in Tbilisi and environs: wall, floor, bathroom/wet area, shower, stair,
+  skirting, iron door, and selective ceiling projects.
+- Published rates: wall 90 GEL/m²; floor, bathroom/shower, and selective
+  ceiling 140 GEL/m²; iron door 1,200 GEL/door; skirting 30 GEL/linear m.
+  Standard project minimum: 30 m² or 2,500 GEL. DeconArt is currently not a
+  VAT payer, so VAT is not added to the published prices.
+- Furniture and nonstandard surfaces are separate custom projects. Kitchen
+  backsplashes are not part of the standard offer.
 - Public address: Tbilisi, Ioseliani St. 107.
 - Public phone: +995 577 789 990.
 - Published finishes: Sage Mist, Linen, Pearl, Warm Stone, Glacier, Forest Sage.
