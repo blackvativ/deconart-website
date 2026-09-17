@@ -1,108 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ka">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DECON ART — მოთხოვნა მიღებულია</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#121512">
+  <title>მოთხოვნა მიღებულია — DECON ART</title>
+  <link rel="icon" href="assets/brand/deconart-logo.png">
   <style>
-    @font-face {
-      font-family: 'Smartdoor';
-      src: url('Smartdoor-font.woff2') format('woff2');
-      font-display: swap;
-    }
-
-    :root {
-      --sage: #677465;
-      --terra: #be654e;
-      --white: #ffffff;
-      --off-white: #f5f3f0;
-      --dark: #1a1916;
-      --font: 'Smartdoor', 'Noto Sans Georgian', 'Helvetica Neue', Arial, sans-serif;
-    }
-
+    @font-face { font-family: "Decon"; src: url("Smartdoor-font.woff2") format("woff2"); font-display: swap; }
+    :root { --ink:#121512; --paper:#f3f0e9; --sage:#687567; --terra:#c66e54; --white:#fffef9; }
     * { box-sizing: border-box; }
-
     body {
+      min-height: 100svh;
       margin: 0;
-      min-height: 100vh;
       display: grid;
       place-items: center;
       padding: 24px;
+      color: var(--white);
       background:
-        radial-gradient(circle at top right, rgba(190,101,78,0.18), transparent 35%),
-        radial-gradient(circle at bottom left, rgba(103,116,101,0.22), transparent 35%),
-        var(--dark);
-      color: var(--white);
-      font-family: var(--font);
+        linear-gradient(90deg, rgba(18,21,18,.94), rgba(18,21,18,.73)),
+        url("assets/finishes/forest-sage.jpg") center / cover;
+      font-family: "Decon", system-ui, sans-serif;
     }
-
-    .card {
-      width: min(100%, 640px);
-      padding: 48px 36px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 4px;
-      text-align: center;
-      backdrop-filter: blur(12px);
-    }
-
-    h1 {
-      margin: 0 0 16px;
-      font-size: clamp(32px, 5vw, 54px);
-      font-weight: 300;
-      line-height: 1.1;
-    }
-
-    h1 strong {
-      font-weight: 700;
-      color: var(--terra);
-    }
-
-    p {
-      margin: 0 auto 28px;
-      max-width: 460px;
-      color: rgba(255,255,255,0.74);
-      line-height: 1.8;
-      font-size: 15px;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    a {
-      display: inline-block;
-      padding: 14px 24px;
-      border-radius: 2px;
-      text-decoration: none;
-      font-size: 13px;
-      letter-spacing: 0.06em;
-    }
-
-    .primary {
-      background: var(--terra);
-      color: var(--white);
-    }
-
-    .secondary {
-      border: 1px solid rgba(255,255,255,0.18);
-      color: rgba(255,255,255,0.8);
-    }
+    main { width: min(720px, 100%); padding: clamp(26px, 6vw, 58px); border: 1px solid rgba(255,255,255,.16); border-radius: 28px; background: rgba(18,21,18,.72); backdrop-filter: blur(18px); box-shadow: 0 30px 90px rgba(0,0,0,.34); }
+    img { width: 170px; height: auto; }
+    .status { display: inline-flex; align-items: center; gap: 10px; margin-top: 36px; color: #bdc9b9; font-size: 12px; font-weight: 750; letter-spacing: .11em; text-transform: uppercase; }
+    .status::before { content:""; width: 9px; height: 9px; border-radius: 50%; background: var(--terra); box-shadow: 0 0 0 6px rgba(198,110,84,.17); }
+    h1 { margin: 20px 0 0; max-width: 620px; font-size: clamp(48px, 9vw, 84px); line-height: .95; letter-spacing: -.055em; }
+    h1 em { display: block; font-family: Georgia, serif; font-weight: 400; color: var(--terra); }
+    p { margin: 24px 0 0; max-width: 570px; color: rgba(255,255,255,.65); font-size: 18px; line-height: 1.7; }
+    .next { margin-top: 28px; padding: 20px; border-radius: 17px; background: rgba(255,255,255,.07); }
+    .next strong { display:block; }
+    .next span { display:block; margin-top: 6px; color: rgba(255,255,255,.56); font-size: 14px; }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; margin-top: 30px; }
+    a { min-height: 50px; padding: 13px 18px; display:inline-flex; align-items:center; justify-content:center; border-radius:14px; text-decoration:none; font-weight:750; }
+    .primary { background:var(--terra); color:var(--white); }
+    .secondary { border:1px solid rgba(255,255,255,.2); color:var(--white); }
   </style>
 </head>
 <body>
-  <main class="card">
-    <h1>მოთხოვნა <strong>მიღებულია</strong></h1>
-    <p>თქვენი ინფორმაცია წარმატებით გაიგზავნა. მალე დაგიკავშირდებით დეტალების დასაზუსტებლად.</p>
+  <main>
+    <a href="/" aria-label="DECON ART მთავარი"><img src="assets/brand/deconart-logo.png" width="900" height="365" alt="DECON ART"></a>
+    <div class="status">მოთხოვნა მიღებულია</div>
+    <h1>მადლობა.<em>შემდეგი ნაბიჯი მარტივია.</em></h1>
+    <p>გადავხედავთ თქვენს ინფორმაციას და დაგიკავშირდებით დეტალების დასაზუსტებლად. ზუსტი შეფასებისთვის მოამზადეთ ზედაპირის 2–4 ფოტო.</p>
+    <div class="next"><strong>გსურთ ფოტოების ახლავე გამოგზავნა?</strong><span>გახსენით Messenger და დაურთეთ მ² + ლოკაცია.</span></div>
     <div class="actions">
-      <a class="primary" href="/">მთავარ გვერდზე დაბრუნება</a>
-      <a class="secondary" href="https://www.facebook.com/profile.php?id=61588337703082" target="_blank" rel="noopener">Facebook</a>
+      <a class="primary" href="https://m.me/61588337703082" target="_blank" rel="noopener">Messenger-ში გაგრძელება ↗</a>
+      <a class="secondary" href="/">საიტზე დაბრუნება</a>
+      <a class="secondary" href="tel:+995577789990">დარეკვა</a>
     </div>
   </main>
 </body>
