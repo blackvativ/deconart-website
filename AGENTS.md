@@ -32,7 +32,8 @@ Read this file before changing the DeconArt website.
   backsplashes are not part of the standard offer.
 - Public address: Tbilisi, Ioseliani St. 107.
 - Public phone: +995 577 789 990.
-- Published finishes: Sage Mist, Linen, Pearl, Warm Stone, Glacier, Forest Sage.
+- Published finishes: Silver Mist, Linen, Sand Veil, Warm Stone, Chalk Linen,
+  Forest Sage.
 - Lead form name: `project-request`; submissions are handled by Netlify Forms and redirect to `/thanks.html`.
 - No Instagram link, product shop, cart, or Shopify storefront is currently present.
 
@@ -42,7 +43,7 @@ The active Notion project shifts DeconArt toward modern dining and coffee tables
 
 - Tops: MDF coated with real DeconArt microcement.
 - Legs: primarily stainless steel; acrylic is optional.
-- First finishes: Sage Mist, Warm Stone, and the real beige board sample.
+- First finishes: Silver Mist, Warm Stone, and the real beige board sample.
 - Use real finish/sample photos in renders, never generic concrete textures.
 - Assumed sizes are only placeholders until Iko confirms dimensions: dining about 180×90 cm and coffee about 120×60 cm.
 - Default finished heights: dining 75 cm; coffee 40–45 cm; assumed top thickness 3 cm.
